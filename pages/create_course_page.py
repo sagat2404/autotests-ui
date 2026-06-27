@@ -22,12 +22,6 @@ class CreateCoursePage(BasePage):
         self.toolbar_create_course_exercises = CreateCourseExercisesToolbarViewComponent(page)
         self.create_course_empty_component = EmptyViewComponent(page, 'create-course-preview')
 
-    def click_delete_exercise_button(self, index: int):
-        delete_exercise_button = self.page.get_by_test_id(
-            f"create-course-exercise-{index}-box-toolbar-delete-exercise-button"
-        )
-        delete_exercise_button.click()
-
     def check_visible_create_exercise_form(self, index: int, title: str, description: str):
         exercise_subtitle = self.page.get_by_test_id(
             f"create-course-exercise-{index}-box-toolbar-subtitle-text"

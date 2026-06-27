@@ -2,11 +2,21 @@ import pytest
 
 from playwright.async_api import Page
 
+from components.authentication.login_form_component import LoginFormComponent
+from pages.login_page import LoginPage
 from pages.courses_list_page import CoursesListPage
 from pages.create_course_page import CreateCoursePage
 from pages.dashboard_page import DashboardPage
 from pages.registration_page import RegistrationPage
 
+
+@pytest.fixture(scope='function')
+def login_page(chromium_page: Page) -> LoginPage:
+    return LoginPage(page=chromium_page)
+
+@pytest.fixture(scope='function')
+def login_form(chromium_page: Page) -> LoginFormComponent:
+    return LoginFormComponent(page=chromium_page)
 
 @pytest.fixture(scope='function')
 def registration_page(chromium_page: Page) -> RegistrationPage:
