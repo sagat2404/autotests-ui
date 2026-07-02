@@ -1,17 +1,19 @@
 from playwright.sync_api import Page, expect
 
 from components.base_component import BaseComponent
+from elements.input import Input
+from elements.textarea import Textarea
 
 
 class CreateCourseFormComponent(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.title = page.get_by_test_id('create-course-form-title-input').locator('input')
-        self.estimated_time = page.get_by_test_id('create-course-form-estimated-time-input').locator('input')
-        self.description = page.get_by_test_id('create-course-form-description-input').locator('textarea').first
-        self.max_score= page.get_by_test_id('create-course-form-max-score-input').locator('input')
-        self.min_score = page.get_by_test_id('create-course-form-min-score-input').locator('input')
+        self.title = Input(page, 'create-course-form-title-input', 'Create course form title')
+        self.estimated_time = Input(page, 'create-course-form-estimated-time-input', 'Create course form estimated time')
+        self.description = Textarea(page, 'create-course-form-description-input', 'Create course form description')
+        self.max_score= Input(page, 'create-course-form-max-score-input', 'Create course form max score')
+        self.min_score = Input(page, 'create-course-form-min-score-input', 'Create course form min score')
 
     def fill(
             self,
@@ -39,17 +41,17 @@ class CreateCourseFormComponent(BaseComponent):
             max_score: str,
             min_score: str
     ):
-        expect(self.title).to_be_visible()
-        expect(self.title).to_have_value(title)
+        self.title.check_visible()
+        self.title.check_have_value(title)
 
-        expect(self.estimated_time).to_be_visible()
-        expect(self.estimated_time).to_have_value(estimated_time)
+        self.estimated_time.check_visible()
+        self.estimated_time.check_have_value(estimated_time)
 
-        expect(self.description).to_be_visible()
-        expect(self.description).to_have_value(description)
+        self.description.check_visible()
+        self.description.check_have_value(description)
 
-        expect(self.max_score).to_be_visible()
-        expect(self.max_score).to_have_value(max_score)
+        self.max_score.check_visible()
+        self.max_score.check_have_value(max_score)
 
-        expect(self.min_score).to_be_visible()
-        expect(self.min_score).to_have_value(min_score)
+        self.min_score.check_visible()
+        self.min_score.check_have_value(min_score)
