@@ -2,6 +2,8 @@ from playwright.sync_api import Page, expect
 
 from components.base_component import BaseComponent
 from components.views.empty_view_component import EmptyViewComponent
+from elements.button import Button
+from elements.text import Text
 
 
 class CreateCourseExercisesToolbarViewComponent(BaseComponent):
@@ -10,13 +12,13 @@ class CreateCourseExercisesToolbarViewComponent(BaseComponent):
 
         self.exercises_empty_view = EmptyViewComponent(page, 'create-course-exercises')
 
-        self.title = page.get_by_test_id('create-course-exercises-box-toolbar-title-text')
-        self.create_course_exercises_toolbar_button = page.get_by_test_id('create-course-exercises-box-toolbar-title-text')
+        self.title = Text(page, 'create-course-exercises-box-toolbar-title-text', 'Create course exercises title')
+        self.create_course_exercises_toolbar_button = Button(page, 'create-course-exercises-box-toolbar-title-text', 'Create course exercises title')
 
     def check_visible(self):
-        expect(self.title).to_be_visible()
-        expect(self.title).to_have_text('Exercises')
-        expect(self.create_course_exercises_toolbar_button).to_be_visible()
+        self.title.check_visible()
+        self.title.check_have_text('Exercises')
+        self.create_course_exercises_toolbar_button.check_visible()
         self.exercises_empty_view.check_visible(
             title='There is no exercises',
             description='Click on "Create exercise" button to create new exercise'
