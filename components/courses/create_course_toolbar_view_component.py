@@ -1,4 +1,6 @@
-from playwright.sync_api import Page, expect
+import re
+
+from playwright.sync_api import Page
 
 from elements.button import Button
 from elements.text import Text
@@ -24,3 +26,4 @@ class CreateCourseToolbarViewComponent(BasePage):
 
     def click_create_course_button(self):
         self.create_course_toolbar_button.click()
+        self.check_current_url(re.compile(".*/#/courses"))
