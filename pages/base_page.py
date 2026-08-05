@@ -3,14 +3,19 @@ from typing import Pattern
 import allure
 from playwright.sync_api import Page, expect
 
+from config import settings
+
 
 class BasePage:
     def __init__(self, page: Page):
         self.page = page
 
     def visit(self, url: str):
-        with allure.step(f'Opening the url "{url}"'):
-            self.page.goto(url, wait_until='networkidle')
+        base = settings.get_base_url()
+        full_url = f"{base}/{url.lstrip('/')}"
+
+        with allure.step(f'Opening the url "{full_url}"'):
+            self.page.goto(full_url, wait_until='networkidle')
 
     def reload(self):
         with allure.step(f'Reloading page with url "{self.page.url}"'):
