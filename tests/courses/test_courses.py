@@ -37,12 +37,12 @@ class TestCourses:
         create_course_page.visit(AppRoute.COURSES_CREATE)
         create_course_page.toolbar_create_course_exercises.check_visible()
         create_course_page.image_upload_widget.check_visible(is_image_uploaded=False)
-        create_course_page.create_course_form.check_visible(
+        create_course_page.create_course_form.check_visible_create_course_form(
             title="", estimated_time="", description="", max_score="0", min_score="0"
         )
 
         create_course_page.toolbar_create_course_exercises.check_visible()
-        create_course_page.create_course_empty_component()
+        create_course_page.create_course_empty_component.check_visible("No image selected", "Preview of selected image will be displayed here")
 
         create_course_page.image_upload_widget.upload_preview_image(settings.test_data.image_png_file)
         create_course_page.image_upload_widget.check_visible(is_image_uploaded=True)
@@ -53,7 +53,7 @@ class TestCourses:
             max_score="100",
             min_score="10"
         )
-        create_course_page.toolbar_create_course_exercises.click_create_course_button()
+        create_course_page.toolbar_create_course.click_create_course_button()
 
         courses_list_page.toolbar_view.check_visible()
         courses_list_page.course_view.check_visible(
