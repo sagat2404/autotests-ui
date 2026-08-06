@@ -31,6 +31,6 @@ class TestRegistration:
             username=settings.test_user.username,
             password=settings.test_user.password
         )
-        registration_page.click_registration_button()
+        registration_page.click_button()
 
         dashboard_page.dashboard_toolbar.check_visible()
