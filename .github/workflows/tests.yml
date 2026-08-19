@@ -44,7 +44,7 @@ jobs:
   publish-report:
     name: Get Allure history
     needs: run-tests
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Download math result for job 1
         uses: actions/download-artifact@v5
