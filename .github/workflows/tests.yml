@@ -37,7 +37,24 @@ jobs:
       - name: Run Playwright tests with pytest and generate Allure results
         run: |
           pytest -m regression --alluredir=allure-results --numprocesses 2  # Запускаем тесты, отмеченные как "regression", генерируем результаты для Allure
-
+      - name: Upload artefact
+        uses: actions/upload-artifact@v7
+        with:
+          path: allure-results
+  publish-report:
+    name: Get Allure history
+    needs: run-tests
+    runs-on: windows-latest
+    steps:
+      - name: Download math result for job 1
+        uses: actions/download-artifact@v5
+        with:
+          name: artifact
+      - name: Upload math result for job 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact
+          path: allure-results
       # 5. Шаг для получения истории отчётов Allure, если она существует
       - name: Get Allure history
         uses: actions/checkout@v4  # Опять клонируем репозиторий, чтобы получить историю отчётов
