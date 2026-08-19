@@ -40,20 +40,17 @@ jobs:
       - name: Upload artefact
         uses: actions/upload-artifact@v7
         with:
+          name: allure-results-artifact
           path: allure-results
   publish-report:
-    name: Get Allure history
+    name: Generate and Publish Report
     needs: run-tests
     runs-on: ubuntu-latest
     steps:
-      - name: Download math result for job 1
-        uses: actions/download-artifact@v5
+      - name: Download Allure Results
+        uses: actions/download-artifact@v4
         with:
-          name: artifact
-      - name: Upload math result for job 2
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifact
+          name: allure-results-artifact
           path: allure-results
       # 5. Шаг для получения истории отчётов Allure, если она существует
       - name: Get Allure history
